@@ -19066,30 +19066,44 @@ var ListManager = React.createClass({
   },
   handleSubmit: function (e) {
     e.preventDefault();
-    var currentItems = this.state.items;
-    currentItems.push(this.state.newItemText);
-    this.setState({ items: currentItems, newItemText: '' });
+    if (this.state.newItemText != '') {
+      var currentItems = this.state.items;
+      currentItems.push(this.state.newItemText);
+      this.setState({ items: currentItems, newItemText: '' });
+    }
   },
   render: function () {
     return React.createElement(
       'div',
-      null,
+      { className: 'col-sm-4' },
       React.createElement(
-        'h3',
-        null,
-        this.props.title
-      ),
-      React.createElement(
-        'form',
-        { onSubmit: this.handleSubmit },
-        React.createElement('input', { onChange: this.onChange, value: this.state.newItemText }),
+        'div',
+        { className: 'panel panel-default' },
         React.createElement(
-          'button',
-          null,
-          'Add'
+          'div',
+          { className: 'panel-heading' },
+          React.createElement(
+            'h3',
+            null,
+            this.props.title
+          )
+        ),
+        React.createElement(
+          'div',
+          { className: 'panel-body' },
+          React.createElement(
+            'form',
+            { onSubmit: this.handleSubmit },
+            React.createElement('input', { onChange: this.onChange, value: this.state.newItemText }),
+            React.createElement(
+              'button',
+              null,
+              'Add'
+            )
+          ),
+          React.createElement(List, { items: this.state.items })
         )
-      ),
-      React.createElement(List, { items: this.state.items })
+      )
     );
   }
 });
